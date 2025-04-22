@@ -47,18 +47,36 @@ export default function Home() {
       {/* Contact Form */}
       <section id="contact" className="p-10">
         <div className="card bg-base-200 shadow-xl max-w-xl mx-auto">
-          <div className="card-body">
+          <div className="card-body space-y-4">
             <h3 className="card-title">Contact Me</h3>
-            <form className="form-control gap-4">
-              <input type="text" placeholder="Your Name" className="input input-bordered" />
-              <input type="email" placeholder="Email" className="input input-bordered" />
-              <input type="text" placeholder="Subject" className="input input-bordered" />
-              <textarea placeholder="Your Message" className="textarea textarea-bordered h-24" />
-              <button className="btn btn-primary w-full">Send</button>
+            <form className="flex flex-col space-y-4">
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="input input-bordered w-full"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                placeholder="Subject"
+                className="input input-bordered w-full"
+              />
+              <textarea
+                placeholder="Your Message"
+                className="textarea textarea-bordered w-full h-24"
+              />
+              <button type="submit" className="btn btn-primary w-full">
+                Send
+              </button>
             </form>
           </div>
         </div>
       </section>
+
 
       <footer className="footer footer-center p-4 bg-base-300 text-base-content">
         <div>&copy; 2025 Simplify Dev Solutions</div>
