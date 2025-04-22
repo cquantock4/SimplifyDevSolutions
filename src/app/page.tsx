@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+'use client';
 
 export default function Home() {
   return (
@@ -49,29 +48,37 @@ export default function Home() {
         <div className="card bg-base-200 shadow-xl max-w-xl mx-auto">
           <div className="card-body space-y-4">
             <h3 className="card-title">Contact Me</h3>
-            <form className="flex flex-col space-y-4">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="input input-bordered w-full"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="input input-bordered w-full"
-              />
-              <input
-                type="text"
-                placeholder="Subject"
-                className="input input-bordered w-full"
-              />
-              <textarea
-                placeholder="Your Message"
-                className="textarea textarea-bordered w-full h-24"
-              />
-              <button type="submit" className="btn btn-primary w-full">
-                Send
-              </button>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const formData = new FormData(form);
+
+                const response = await fetch("/api/contact", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    name: formData.get("name"),
+                    email: formData.get("email"),
+                    subject: formData.get("subject"),
+                    message: formData.get("message"),
+                  }),
+                });
+
+                if (response.ok) {
+                  alert("Message sent!");
+                  form.reset();
+                } else {
+                  alert("Message failed.");
+                }
+              }}
+              className="flex flex-col space-y-4"
+            >
+              <input name="name" type="text" placeholder="Your Name" className="input input-bordered w-full" required />
+              <input name="email" type="email" placeholder="Email" className="input input-bordered w-full" required />
+              <input name="subject" type="text" placeholder="Subject" className="input input-bordered w-full" />
+              <textarea name="message" placeholder="Your Message" className="textarea textarea-bordered w-full h-24" required />
+              <button type="submit" className="btn btn-primary w-full">Send</button>
             </form>
           </div>
         </div>
